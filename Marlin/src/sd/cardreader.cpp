@@ -319,9 +319,9 @@ void CardReader::printListing(
           if (includeLongNames) {
             size_t lenPrependLong = prependLong ? strlen(prependLong) + 1 : 0;
             // Allocate enough stack space for the full long path including / separator
-            char pathLong[lenPrependLong + strlen(longFilename) + 1];
+            char pathLong[lenPrependLong + strlen((const char*)longFilename) + 1];
             if (prependLong) { strcpy(pathLong, prependLong); pathLong[lenPrependLong - 1] = '/'; }
-            strcpy(pathLong + lenPrependLong, longFilename);
+            strcpy(pathLong + lenPrependLong, (const char*)longFilename);
             printListing(child, path OPTARG(CUSTOM_FIRMWARE_UPLOAD, onlyBin), true, pathLong);
           }
           else
@@ -344,7 +344,7 @@ void CardReader::printListing(
         if (includeLongNames) {
           SERIAL_CHAR(' ');
           if (prependLong) { SERIAL_ECHO(prependLong); SERIAL_CHAR('/'); }
-          SERIAL_ECHO(longFilename[0] ? longFilename : filename);
+          SERIAL_ECHO((char)longFilename[0] ? (char*) longFilename : (char*)filename);
         }
       #endif
       SERIAL_EOL();
@@ -403,7 +403,7 @@ void CardReader::ls(
 
       // Print /LongNamePart to serial output or the short name if not available
       SERIAL_CHAR('/');
-      SERIAL_ECHO(longFilename[0] ? longFilename : filename);
+      SERIAL_ECHO((char)longFilename[0] ? (char*)longFilename : (char*)filename);
 
       // If the filename was printed then that's it
       if (!flag.filenameIsDir) break;
@@ -441,7 +441,7 @@ void CardReader::printSelectedFilename() {
       selectFileByName(dosFilename);
       if (longFilename[0]) {
         SERIAL_CHAR(' ');
-        SERIAL_ECHO(longFilename);
+        SERIAL_ECHO((char*)longFilename);
       }
     #endif
   }
