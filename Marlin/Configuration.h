@@ -580,7 +580,7 @@
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  *
  */
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 66
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -645,7 +645,7 @@
 
 // Below this temperature the heater will be switched off
 // because it probably indicates a broken thermistor wire.
-#define HEATER_0_MINTEMP   5
+#define HEATER_0_MINTEMP   -5
 #define HEATER_1_MINTEMP   5
 #define HEATER_2_MINTEMP   5
 #define HEATER_3_MINTEMP   5
@@ -659,14 +659,14 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 320
-#define HEATER_1_MAXTEMP 320
-#define HEATER_2_MAXTEMP 320
-#define HEATER_3_MAXTEMP 320
-#define HEATER_4_MAXTEMP 320
-#define HEATER_5_MAXTEMP 320
-#define HEATER_6_MAXTEMP 320
-#define HEATER_7_MAXTEMP 320
+#define HEATER_0_MAXTEMP 400
+#define HEATER_1_MAXTEMP 400
+#define HEATER_2_MAXTEMP 400
+#define HEATER_3_MAXTEMP 400
+#define HEATER_4_MAXTEMP 400
+#define HEATER_5_MAXTEMP 400
+#define HEATER_6_MAXTEMP 400
+#define HEATER_7_MAXTEMP 400
 #if TRONXY_PROJ == PROJ_X5SA \
 || TRONXY_PROJ == PROJ_D01_PLUS \
 || TRONXY_PROJ == PROJ_X5SA_2E \
@@ -718,7 +718,7 @@
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
-  //#define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
+  #define PID_DEBUG             // Print PID debug data to the serial port. Use 'M303 D' to toggle activation.
   //#define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with G-code: M301 E[extruder number, 0-2]
   #if ENABLED(PID_PARAMS_PER_HOTEND)
@@ -1329,7 +1329,7 @@
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 300, 300, 20, 80 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 60, 160 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1350,7 +1350,7 @@
 
 #define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 3000, 3000, 200, 10000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 9000, 9000, 300, 10000 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1389,7 +1389,7 @@
 
   #define LIMITED_JERK_EDITING        // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
   #if ENABLED(LIMITED_JERK_EDITING)
-    #define MAX_JERK_EDIT_VALUES { 20, 20, 1.0, 10 } // ...or, set your own edit limits
+    #define MAX_JERK_EDIT_VALUES { 40, 40, 4.0, 40 } // ...or, set your own edit limits
   #endif
 #endif
 
@@ -2399,7 +2399,7 @@
   || TRONXY_PROJ == PROJ_VEHO800_2E
   #define GRID_MAX_POINTS_X 5 //因为屏幕显示范围不够,本固件最大不能超过5
   #else
-  #define GRID_MAX_POINTS_X 4
+  #define GRID_MAX_POINTS_X 8
   #endif
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -2640,7 +2640,7 @@
 #define EEPROM_SETTINGS     // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
-#define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
+//#define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
   #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
   #define EEPROM_INIT_NOW   // Init EEPROM on first boot after a new build.
